@@ -1,0 +1,26 @@
+version: "2.1"
+services:
+    api:
+        container_name: api
+        env_file: ./.env
+        build:
+          context: .
+          dockerfile: ./Dockerfile
+        image: docker/api
+        restart: always
+        environment: 
+          - TYPEORM_HOST=database
+        ports:
+          - "3000:3000"
+        networks:
+          disid-network:
+            aliases:
+              - api
+
+        volumes:
+          - .:/app
+    
+networks:
+  disid-network:
+    external:
+      name: disid-network

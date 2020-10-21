@@ -1,0 +1,70 @@
+version: "2.1"
+services:
+  database:
+    container_name: database
+    image: mongo:3.6.4
+    restart: always   
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+      - ./database/entrypoint/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    environment:
+      - NODE_ENV=development
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=fHYmOGIIsjBxbvcp
+    healthcheck:
+      test: mongo --eval "db.runCommand('ping').ok"
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks:
+      disid-network:
+        aliases:
+          - mongo
+  api:
+    container_name: api
+    env_file: ./api/.env
+    build:
+      context: ./api
+      dockerfile: ./Dockerfile
+    image: docker/api
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on: 
+      - database
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - TYPEORM_CONNECTION=mongodb
+      - TYPEORM_HOST=database
+      - TYPEORM_USERNAME=disidUser
+      - TYPEORM_PASSWORD=wSdPIchNyR8F09QH
+      - TYPEORM_DATABASE=disid
+      - TYPEORM_PORT=27017
+      - TYPEORM_SYNCHRONIZE=false
+      - TYPEORM_LOGGING=false
+      - TYPEORM_ENTITIES=src/models/*.ts
+      - TYPEORM_MIGRATIONS=src/migration/**/*.ts
+      - TYPEORM_SUBSCRIBERS=src/subscriber/**/*.ts
+      - TYPEORM_LOGGING=true
+    networks:
+      disid-network:
+        aliases:
+          - api
+    volumes:
+      - ./api:/app
+
+volumes:
+  mongo-data:
+    name: mongo-data
+
+networks:
+  disid-network:
+    name: disid-network
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.22.4.0/24
+        gateway: 172.22.4.1
