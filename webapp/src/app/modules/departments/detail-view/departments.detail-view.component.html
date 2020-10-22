@@ -1,0 +1,26 @@
+<mat-icon class="add-icon" matTooltip="Volver" (click)="return()">arrow_back</mat-icon>
+
+<div class="detail-view-wrapper">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="wrapper">
+            <mat-form-field class="form-field">
+                <input placeholder="Nombre
+                " matInput formControlName="name">
+            </mat-form-field>
+             <mat-form-field class="form-field">
+                <input placeholder="Descripción" matInput formControlName="description">
+            </mat-form-field>
+            <mat-error *ngIf="!form.get('description').valid">
+                Url no valida
+            </mat-error>
+            <div class="button-container">
+                 <button class="form-login-submit form-login-items" type="button" mat-button color="primary"
+                    [disabled]="!form.valid" (click)="submit(form.value)"><a
+                        class="form-submit">Guardar</a></button>
+                 <button *ngIf="form.get('_id').value" class="form-login-submit form-login-items" type="button"
+                    mat-button color="primary" [disabled]="disabled" (click)="showDeleteDialog(form.value)"><a
+                        class="form-submit">Borrar</a></button>
+            </div>
+        </div>
+    </form>
+</div>

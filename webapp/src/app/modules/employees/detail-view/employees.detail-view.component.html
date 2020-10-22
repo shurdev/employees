@@ -1,0 +1,31 @@
+
+<div class="detail-view-wrapper">
+    <div>
+        <mat-icon class="add-icon" matTooltip="Volver" (click)="return()">arrow_back</mat-icon>
+    </div>
+    <form class="form-detail-view" [formGroup]="form" (ngSubmit)="submit()">
+        <mat-form-field class="form-field">
+            <input placeholder="Nombre" matInput formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+            <input placeholder="Dirección" matInput formControlName="address">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+            <input placeholder="Edad" matInput formControlName="age">
+        </mat-form-field>
+        <mat-error *ngIf="!form.get('age').valid">
+            Campo requerido
+        </mat-error>
+        <!-- <mat-form-field class="form-field">
+            <input placeholder="Fecha de incorporación" matInput formControlName="createdAt">
+        </mat-form-field> -->
+        <div class="button-container">
+             <button class="form-login-submit form-login-items" type="button" mat-button color="primary"
+                [disabled]="!form.valid" (click)="submit(form.value)"><a
+                    class="form-submit">Guardar</a></button>
+             <button *ngIf="form.get('_id').value" class="form-login-submit form-login-items" type="button"
+                mat-button color="primary" [disabled]="disabled" (click)="deleteEmployee(form.value)"><a
+                    class="form-submit">Borrar</a></button>
+        </div>
+    </form>
+</div>

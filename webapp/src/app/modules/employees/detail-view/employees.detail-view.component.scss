@@ -1,0 +1,43 @@
+.detail-view-wrapper {
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  div:first-child {
+    margin: 6em 0;
+  }
+  
+  .form-field.mat-form-field {
+    margin: 1em 0;
+  }
+}
+.form-detail-view {
+  background-color: white;
+  padding: 2em;
+  width: 75%;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+.add-icon {
+  float: right;
+  margin-right: 100px;
+  cursor: pointer;
+}
+mat-error {
+  margin-top: -1.7em;
+  margin-left: 10px;
+  font-size: 13px;
+}
+mat-icon {
+  font-size: 3em;
+}
+mat-form-field {
+  width: 100%;
+}
+
+.form-login-submit{
+  justify-content: center;
+}
+
+.button-container {
+  text-align: center;
+}
