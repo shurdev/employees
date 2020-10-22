@@ -13,7 +13,7 @@ services:
         ports:
           - "3000:3000"
         networks:
-          disid-network:
+          management-network:
             aliases:
               - api
 
@@ -21,6 +21,6 @@ services:
           - .:/app
     
 networks:
-  disid-network:
+  management-network:
     external:
-      name: disid-network
+      name: management-network

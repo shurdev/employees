@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "disid management api",
+  "description": "employee management api",
   "main": "src/server.ts",
   "scripts": {
     "nstart": "nodemon dist/server.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shurdev/disid.git"
+    "url": "git+https://github.com/shurdev/employees.git"
   },
   "author": "David Poveda",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shurdev/disid/issues"
+    "url": "https://github.com/shurdev/employees/issues"
   },
-  "homepage": "https://github.com/shurdev/disid#readme",
+  "homepage": "https://github.com/shurdev/employees#readme",
   "dependencies": {
     "@types/mongodb": "^3.3.16",
     "@types/node": "^13.7.7",

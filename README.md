@@ -1,4 +1,4 @@
-# Disid
+# Management Employee
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -23,7 +23,7 @@ if you have an error creating the network
 
 
 ```bash
-docker network create disid-network
+docker network create management-network
 ```
 ### Deployment On Windows
 
@@ -43,6 +43,10 @@ Start apis
 /api npm i && npm start
 ```
 
+Start Webapp
+```bash
+/webapp npm i && npm start
+```
 
 ### Deployment On macOS
 

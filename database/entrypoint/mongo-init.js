@@ -1,9 +1,9 @@
 db.auth('admin', 'fHYmOGIIsjBxbvcp')
 
-db = db.getSiblingDB('disid')
+db = db.getSiblingDB('management')
 
 db.createUser({
-  user: 'disidUser',
+  user: 'managementUser',
   pwd: 'wSdPIchNyR8F09QH',
   roles: [
     {

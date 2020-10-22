@@ -19,9 +19,20 @@ services:
       timeout: 5s
       retries: 12
     networks:
-      disid-network:
+      management-network:
         aliases:
           - mongo
+    # angular-service: # The name of the service
+    #   container_name: angularcontainer  # Container name
+    #   build:
+    #     context: ./webapp
+    #     dockerfile: ./Dockerfile
+    #   ports: 
+    #       - '4200:80' # Port mapping
+    #   networks:
+    #     management-network:
+    #       aliases:
+    #         - webapp
   api:
     container_name: api
     env_file: ./api/.env
@@ -39,9 +50,9 @@ services:
       - PORT=3000
       - TYPEORM_CONNECTION=mongodb
       - TYPEORM_HOST=database
-      - TYPEORM_USERNAME=disidUser
+      - TYPEORM_USERNAME=managementUser
       - TYPEORM_PASSWORD=wSdPIchNyR8F09QH
-      - TYPEORM_DATABASE=disid
+      - TYPEORM_DATABASE=management
       - TYPEORM_PORT=27017
       - TYPEORM_SYNCHRONIZE=false
       - TYPEORM_LOGGING=false
@@ -50,7 +61,7 @@ services:
       - TYPEORM_SUBSCRIBERS=src/subscriber/**/*.ts
       - TYPEORM_LOGGING=true
     networks:
-      disid-network:
+      management-network:
         aliases:
           - api
     volumes:
@@ -61,8 +72,8 @@ volumes:
     name: mongo-data
 
 networks:
-  disid-network:
-    name: disid-network
+  management-network:
+    name: management-network
     ipam:
       driver: default
       config:

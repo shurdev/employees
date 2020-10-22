@@ -20,7 +20,7 @@ services:
       timeout: 5s
       retries: 12
     networks:
-      disid-network:
+      management-network:
         aliases:
           - mongo
 
@@ -29,6 +29,6 @@ volumes:
     name: mongo-data
       
 networks:
-  disid-network:
+  management-network:
     external:
-      name: disid-network
+      name: management-network
