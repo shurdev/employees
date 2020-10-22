@@ -10,9 +10,24 @@ export class  Department extends BaseEntity {
     _id: ObjectId;
 
     @Column ({
+        length: 300,
+    })
+    departmentCode?: number;
+
+    @Column ({
         length: 300
     })
     name?: string;
+
+    @Column ({
+        length: 300
+    })
+    description?: string;
+
+    @Column ({
+        length: 300
+    })
+    employees?: string;
 
     @Column()
     createdAt?: Date;

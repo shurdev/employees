@@ -12,7 +12,17 @@ export class  Employee  extends BaseEntity{
     @Column ({
         length: 300
     })
+    employeeCode?: number;
+
+    @Column ({
+        length: 300
+    })
     name?: string;
+
+    @Column ({
+        length: 300
+    })
+    age?: string;
 
     @Column()
     createdAt?: Date;
