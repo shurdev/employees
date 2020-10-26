@@ -32,13 +32,13 @@ export class ApiDepartmentService {
   }
 
   postDepartments(data: Department) {
-    console.log('asgasg')
     if (!data._id) {
       return this.http.post<Department>(`${environment.api}/departments`, data, this.httpOptions);
     } else {
       return this.http.patch<Department>(`${environment.api}/departments`, data, this.httpOptions);
     }
   }
+
   deleteDepartment(id: string) {
     return this.http.delete<Department>(`${environment.api}/departments/${id}`, this.httpOptions);
   }

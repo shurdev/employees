@@ -1,0 +1,23 @@
+<mat-card>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <h2>Acceso</h2>
+          <mat-error *ngIf="loginInvalid">
+            Usuario o contraseña incorrectos.
+          </mat-error>
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="Email" formControlName="username" required>
+            <mat-error>
+              Introduce un email correcto.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width-input">
+            <input matInput type="password" placeholder="Password" formControlName="password" required>
+            <mat-error>
+              Introduce una contraseña correcta.
+            </mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary">Entrar</button>
+        </form>
+      </mat-card-content>
+    </mat-card>

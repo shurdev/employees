@@ -10,12 +10,12 @@ export class DialogConfirmComponent implements OnInit {
 
   constructor(
     public dialogo: MatDialogRef<DialogConfirmComponent>,
-    @Inject(MAT_DIALOG_DATA) public mensaje: string) { }
+    @Inject(MAT_DIALOG_DATA) public message: string) { }
 
-    cerrarDialogo(): void {
+    closeDialog(): void {
       this.dialogo.close(false);
     }
-    confirmado(): void {
+    confirm(): void {
       this.dialogo.close(true);
     }
 

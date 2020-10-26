@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../../shared/material/material.module';
-import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login.routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -11,7 +11,7 @@ import { LoginRoutingModule } from './login.routing.module';
     ],
     imports: [
         CommonModule,
-        MaterialModule,
+        SharedModule,
         LoginRoutingModule
     ],
     exports: [

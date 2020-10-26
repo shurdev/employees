@@ -84,13 +84,12 @@ const MaterialComponents = [
     OverlayModule,
     PortalModule,
     ScrollingModule,
-  ]
+  ];
 
 @NgModule({
    exports: [MaterialComponents],
    providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
    declarations: [DialogConfirmComponent]
-
 })
 
 export class MaterialModule {

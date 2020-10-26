@@ -4,7 +4,7 @@
       <div class="card">
         <mat-form-field>
           <mat-label>Buscar Departmentos</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Escribe el texto a buscar..." #input>
         </mat-form-field>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         
@@ -31,7 +31,6 @@
           <ng-container matColumnDef="actions"  justify="end">
             <th mat-header-cell *matHeaderCellDef> Acción </th>
             <td mat-cell *matCellDef="let element">
-              <!-- <mat-icon class="table-action-icon" matTooltip="Asignar" (click)="assignDepartment(element)">arrow_back</mat-icon> -->
               <mat-icon class="table-action-icon" matTooltip="Editar" (click)="editDepartment(element)">edit</mat-icon>
               <mat-icon class="table-action-icon" matTooltip="Eliminar" (click)="deleteDepartment(element)">delete</mat-icon>
             </td>

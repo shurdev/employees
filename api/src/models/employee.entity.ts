@@ -22,11 +22,20 @@ export class  Employee  extends BaseEntity{
     @Column ({
         length: 300
     })
+    address?: string;
+
+    @Column ({
+        length: 300
+    })
     age?: string;
 
     @Column()
     createdAt?: Date;
     
+    // @Column ({
+    //     length: 300
+    // })
+    // department?: string;
     @OneToOne(type => Department, department => department._id, {
         cascade: true,
         eager: true,

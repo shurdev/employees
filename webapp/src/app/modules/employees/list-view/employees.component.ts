@@ -6,6 +6,7 @@ import { Employee } from 'src/app/shared/models/employee.model';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DialogConfirmComponent } from 'src/app/shared/material/dialog-confirm/dialog-confirm.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AssignDialogComponent } from '../assign-dialog/assign-dialog.component';
 
 @Component({
   selector: 'app-employees',
@@ -15,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class EmployeesComponent extends BaseComponent implements OnInit, OnDestroy {
   employeesList;
   buttonClass = 'none';
-  displayedColumns: string[] = ['employeeCode', 'name', 'address', 'age', 'createdAt', 'action'];
+  displayedColumns: string[] = ['employeeCode', 'name', 'address', 'age', 'department', 'createdAt', 'action'];
   dataSource;
 
   constructor(
@@ -58,7 +59,21 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
   }
 
   assignDepartment(employee: Employee) {
-    console.log(employee);
+      this.dialog
+        .open(AssignDialogComponent, {
+          data: employee
+        })
+        .afterClosed()
+        .subscribe((confirm: boolean) => {
+          // if (confirm) {
+          //   this.apiEmployeeService.deleteEmployee(employee._id)
+          //   .subscribe(
+          //     () => this.initSubscriptions()
+          //   );
+          // }
+        }
+      );
+    // console.log(employee);
   }
 
   editEmployee(employee: Employee) {

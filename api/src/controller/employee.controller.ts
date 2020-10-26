@@ -6,7 +6,8 @@ import { ObjectId } from "mongodb";
 
 export async function employeeGetAll(request: Request, response: Response) {
     const employeeRepository = getManager().getRepository(Employee);
-    const employees = await employeeRepository.find({order: {createdAt: "DESC"}});
+    const employees = await employeeRepository.find({relations: ['departments'], order: {createdAt: "DESC"}});
+    console.log(employees);
     response.send(employees);
 }
 
@@ -27,6 +28,7 @@ export async function employeeUpdate(request: Request, response: Response) {
     const id = request.body._id;
     delete employee._id;
     const saveEmployee  = await employeeRepository.update(id, employee);
+    console.log('save', employee)
     response.send(saveEmployee);
 }
 

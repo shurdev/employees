@@ -4,14 +4,17 @@ import { EmployeesDetailViewComponent } from './detail-view/employees.detail-vie
 import { RouterModule } from '@angular/router';
 import { EmployeesComponent } from './list-view/employees.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AssignDialogComponent } from './assign-dialog/assign-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [EmployeesComponent, EmployeesDetailViewComponent],
+  declarations: [EmployeesComponent, EmployeesDetailViewComponent, AssignDialogComponent],
   imports: [
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',
@@ -26,6 +29,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
         component: EmployeesDetailViewComponent
       }
     ])
-  ]
+  ],
+  entryComponents: [AssignDialogComponent]
 })
 export class EmployeesModule { }

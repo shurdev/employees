@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../../shared/material/material.module';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -11,13 +11,13 @@ import { RouterModule } from '@angular/router';
     ],
     imports: [
         CommonModule,
-        MaterialModule,
+        SharedModule,
         RouterModule
     ],
     exports: [
         HeaderComponent,
 
     ],
-    providers: [],
+    providers: [HeaderComponent],
 })
 export class HeaderModule { }

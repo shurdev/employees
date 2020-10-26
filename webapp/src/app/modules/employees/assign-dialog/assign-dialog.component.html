@@ -1,0 +1,18 @@
+<div class="flex">
+    <form class="assign-department-form"[formGroup]="assignDepartmentFormControl" *ngIf="options?.length > 0" (ngSubmit)="submit()">
+        <mat-form-field class="assign-department-fom-field">
+        <input type="text"
+                placeholder="Selecciona un departamento"
+                aria-label="Text"
+                matInput
+                [formControl]="assignDepartmentFormControl"
+                [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayOption">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.name}}
+            </mat-option>
+        </mat-autocomplete>
+        </mat-form-field>
+        <p><button mat-button type="submit"><mat-icon class="header-icon">add</mat-icon></button></p>
+    </form>
+</div>
