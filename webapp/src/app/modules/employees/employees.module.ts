@@ -6,6 +6,7 @@ import { EmployeesComponent } from './list-view/employees.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AssignDialogComponent } from './assign-dialog/assign-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PipeModule } from 'src/app/shared/pipes/pipe.module';
 
 
 
@@ -15,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
+    PipeModule,
     RouterModule.forChild([
       {
         path: '',

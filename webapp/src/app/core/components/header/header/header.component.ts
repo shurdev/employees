@@ -39,7 +39,7 @@ export class HeaderComponent  implements OnInit {
   }
 
   changeStyle($event){
-    this.buttonClass = $event.type === 'mouseover' ? 'animacionVer' : null;
+    this.buttonClass = $event.type === 'mouseover' ? 'showAnimation' : null;
   }
 
   logOut() {

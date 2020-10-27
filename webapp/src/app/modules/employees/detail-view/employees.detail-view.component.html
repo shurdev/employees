@@ -1,40 +1,43 @@
 
 <div class="detail-view-wrapper">
-    <div>
+    <div class="view-icon">
         <mat-icon class="add-icon" matTooltip="Volver" (click)="return()">arrow_back</mat-icon>
     </div>
-    <form class="form-detail-view" [formGroup]="form" (ngSubmit)="submit()">
+    <form class="form-detail-view" [formGroup]="employeeForm" (ngSubmit)="submit()">
         <mat-form-field class="form-field">
             <input placeholder="Nombre" matInput formControlName="name">
         </mat-form-field>
+        <mat-error *ngIf="!employeeForm.get('name').valid">
+            Campo requerido
+        </mat-error>
         <mat-form-field class="form-field">
             <input placeholder="Dirección" matInput formControlName="address">
         </mat-form-field>
-        <mat-form-field class="form-field">
-            <input placeholder="Edad" matInput formControlName="age">
-        </mat-form-field>
-        <mat-error *ngIf="!form.get('age').valid">
+        <mat-error *ngIf="!employeeForm.get('name').valid">
             Campo requerido
         </mat-error>
-        <mat-form-field class="assign-department-fom-field">
-            <input type="text"
-                    placeholder="Selecciona un departamento"
-                    aria-label="Text"
-                    matInput
-                    [formControl]="form"
-                    [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayOption">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option.name}}
-                </mat-option>
-            </mat-autocomplete>
-            </mat-form-field>
+        <mat-form-field class="form-field">
+            <input placeholder="Email" matInput type="text" formControlName="email">
+        </mat-form-field>
+        <mat-error *ngIf="!employeeForm.get('email').valid">
+            Formato de correo incorrecto
+        </mat-error>
+        <mat-error *ngIf="!employeeForm.get('email').valid">
+        </mat-error>
+        <mat-form-field class="form-field">
+            <mat-label>Departamento</mat-label>
+            <mat-select  placeholder="Departamento" formControlName="department">
+            <mat-option *ngFor="let department of options; let i = index" [value]="department._id">
+              {{ department.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
         <div class="button-container">
              <button class="form-login-submit form-login-items" type="button" mat-button color="primary"
-                [disabled]="!form.valid" (click)="submit(form.value)"><a
+                [disabled]="!employeeForm.valid" (click)="submit(employeeForm.value)"><a
                     class="form-submit">Guardar</a></button>
-             <button *ngIf="form.get('_id').value" class="form-login-submit form-login-items" type="button"
-                mat-button color="primary" [disabled]="disabled" (click)="openDeleteEmployeeDialog(form.value)"><a
+             <button *ngIf="employeeForm.get('_id')" class="form-login-submit form-login-items" type="button"
+                mat-button color="primary" [disabled]="disabled" (click)="openDeleteEmployeeDialog(employeeForm.value)"><a
                 class="form-submit">Borrar</a></button>
         </div>
     </form>

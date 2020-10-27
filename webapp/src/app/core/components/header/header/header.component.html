@@ -14,14 +14,15 @@
         <mat-icon class="header-icon">person_add</mat-icon></button></p>
       <p><button mat-button  (click)="goToDepartments()">
         <mat-icon class="header-icon">work</mat-icon></button></p>
-      <p><button mat-button  (click)="logOut()">
-        <mat-icon class="header-icon">work</mat-icon></button></p>
+      <mat-divider [style]="{'margin': '6px'}"></mat-divider>
+        <p><button mat-button  (click)="logOut()">
+        <mat-icon class="header-icon">exit_to_app</mat-icon></button></p>
     </mat-sidenav-content>
   </mat-sidenav-container>
 
-  <div class="container" (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)">
+  <div class="button-container" (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)">
     <button class="buttonF1">
-      <span>+</span>
+      <mat-icon>add</mat-icon>
     </button>
     <button class="btn buttonF2" [ngClass]="buttonClass" [routerLink]="'/employees/new'">
       <mat-icon [matTooltip]="'Añadir Empleado'" [matTooltipPosition]="'left'">person_add</mat-icon>

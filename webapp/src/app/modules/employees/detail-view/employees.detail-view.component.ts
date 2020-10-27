@@ -7,10 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from 'src/app/shared/material/dialog-confirm/dialog-confirm.component';
-import { Observable } from 'rxjs';
 import { Department } from 'src/app/shared/models/department.model';
 import { ApiDepartmentService } from 'src/app/core/http/api-department.service';
-import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-detail-view',
@@ -18,17 +16,13 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./employees.detail-view.component.scss']
 })
 export class EmployeesDetailViewComponent extends BaseComponent implements OnInit {
-
-  form: FormGroup = new FormGroup({
-    _id: new FormControl(null),
+  employeeForm = new FormGroup({
+    _id: new FormControl(),
+    email: new FormControl('', [Validators.required, Validators.email]),
     name: new FormControl('', [Validators.required]),
-    address: new FormControl('', [Validators.required]),
-    age: new FormControl('', [Validators.required]),
-    // body: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required,Validators.minLength(10)]),
+    department: new FormControl(''),
   });
-
-  assignDepartmentFormControl = new FormControl();
-  filteredOptions: Observable<Department[]>;
   options: Department[];
 
   disabled: boolean;
@@ -46,11 +40,6 @@ export class EmployeesDetailViewComponent extends BaseComponent implements OnIni
 
   ngOnInit(): void {
     this.initSubscriptions();
-    this.filteredOptions = this.assignDepartmentFormControl.valueChanges
-    .pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
   }
 
   initSubscriptions() {
@@ -59,7 +48,7 @@ export class EmployeesDetailViewComponent extends BaseComponent implements OnIni
         (params: Employee) => {
           if (params.id) {
             this.apiEmployeeService.getEmployeeById(params.id).subscribe((data: any) => {
-              this.form.reset(data);
+              this.employeeForm.reset(data);
             });
           }
         }
@@ -89,10 +78,7 @@ export class EmployeesDetailViewComponent extends BaseComponent implements OnIni
       .afterClosed()
       .subscribe((confirm: boolean) => {
         if (confirm) {
-          this.apiEmployeeService.deleteEmployee(employee._id)
-          .subscribe(
-            () => this.return()
-          );
+          this.delete(employee);
         }
       }
     );
@@ -109,23 +95,10 @@ export class EmployeesDetailViewComponent extends BaseComponent implements OnIni
 
   openSnackBar(message: string) {
     this.snackBar.open(message, null, {
-      duration: 2000,
+      duration: 3000,
       verticalPosition: 'bottom',
       panelClass: ['red-snackbar']
     });
-  }
-
-  private _filter(value: any): Department[] {
-    if (value && !value._id){
-      const filterValue = value.toLowerCase();
-      return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
-    } else {
-      return this.options;
-    }
-  }
-
-  displayOption(option) {
-    return option ? option.name : undefined;
   }
 
   return() {

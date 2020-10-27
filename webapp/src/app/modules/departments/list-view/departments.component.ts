@@ -43,7 +43,7 @@ export class DepartmentsComponent extends BaseComponent  implements OnInit{
   }
 
   changeStyle($event){
-    this.buttonClass = $event.type === 'mouseover' ? 'animacionVer' : null;
+    this.buttonClass = $event.type === 'mouseover' ? 'showAnimation' : null;
   }
   openDetail(item?) {
     this.router.navigate(['/departments', item.id]);
@@ -58,12 +58,7 @@ export class DepartmentsComponent extends BaseComponent  implements OnInit{
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  assignDepartment(department: Department) {
-    console.log(department);
-  }
-
   editDepartment(department: Department) {
-    console.log(department._id)
     this.router.navigate(['/departments/' + department._id]);
   }
 

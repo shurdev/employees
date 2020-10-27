@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
-import { HttpTransformPipe } from './pipes/http-transform.pipe';
 
 @NgModule({
   imports: [
@@ -11,13 +10,12 @@ import { HttpTransformPipe } from './pipes/http-transform.pipe';
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [
-    HttpTransformPipe
-  ],
+  declarations: [  ],
   exports: [
     MaterialModule,
     ReactiveFormsModule,
-  ]
+  ],
+  providers: [MaterialModule],
 })
 
 export class SharedModule {

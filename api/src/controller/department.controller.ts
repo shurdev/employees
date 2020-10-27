@@ -8,7 +8,6 @@ import { Console } from "console";
 export async function departmentGetAll(request: Request, response: Response) {
     const departmentRepository = getManager().getRepository(Department);
     const departments = await departmentRepository.find({order: {createdAt: "DESC"}});
-    console.log(departments);
     response.send(departments);
 }
 

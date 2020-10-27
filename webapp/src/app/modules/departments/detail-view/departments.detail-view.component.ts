@@ -18,7 +18,7 @@ export class DepartmentsDetailViewComponent extends BaseComponent implements OnI
   form: FormGroup = new FormGroup({
     _id: new FormControl(null),
     name: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.minLength(5)]),
   });
 
   disabled: boolean;

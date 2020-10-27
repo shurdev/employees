@@ -35,7 +35,8 @@ export class AssignDialogComponent extends BaseComponent implements OnInit{
     this.filteredOptions = this.assignDepartmentFormControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => this._filter(value))
+        map(value =>  this._filter(value.department && value.department._id ? value.department._id :
+          value.department && value.department.lenght > 0 ? value.department : null))
     );
   }
 

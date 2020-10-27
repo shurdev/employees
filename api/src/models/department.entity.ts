@@ -37,5 +37,6 @@ export class  Department extends BaseEntity {
         eager: true,
     })
     @JoinColumn({ referencedColumnName: "_id" })
-    employee: Employee;
+    @Column()
+    employee: string;
 }

@@ -23,12 +23,12 @@ export class ApiDepartmentService {
     private http: HttpClient,
   ) { }
 
-  getDepartments(): Observable<any> {
-    return this.http.get<any[]>(`${environment.api}/departments`, this.httpOptions);
+  getDepartments(): Observable<Department[]> {
+    return this.http.get<Department[]>(`${environment.api}/departments`, this.httpOptions);
   }
 
-  getDepartmentById(id: string) {
-    return this.http.get<any[]>(`${environment.api}/departments/${id}`, this.httpOptions);
+  getDepartmentById(id: string): Observable<Department> {
+    return this.http.get<Department>(`${environment.api}/departments/${id}`, this.httpOptions);
   }
 
   postDepartments(data: Department) {

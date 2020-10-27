@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiEmployeeService } from 'src/app/core/http/api-employee.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,6 +7,13 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DialogConfirmComponent } from 'src/app/shared/material/dialog-confirm/dialog-confirm.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AssignDialogComponent } from '../assign-dialog/assign-dialog.component';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { Department } from 'src/app/shared/models/department.model';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ApiDepartmentService } from 'src/app/core/http/api-department.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-employees',
@@ -14,15 +21,26 @@ import { AssignDialogComponent } from '../assign-dialog/assign-dialog.component'
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent extends BaseComponent implements OnInit, OnDestroy {
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false}) sort: MatSort;
+
+  searchEmployeesForm = new FormGroup({
+    name: new FormControl(''),
+    department: new FormControl(''),
+  });
   employeesList;
   buttonClass = 'none';
-  displayedColumns: string[] = ['employeeCode', 'name', 'address', 'age', 'department', 'createdAt', 'action'];
+  displayedColumns: string[] = ['employeeCode', 'name', 'address', 'email', 'department', 'createdAt', 'action'];
   dataSource;
-
+  filterPredicate: ((data: any, filter: string) => boolean);
+  filteredOptions: Observable<Department[]>;
+  options: Department[];
+  arrivalStation: any;
   constructor(
     private router: Router,
     private apiEmployeeService: ApiEmployeeService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private apiDepartmentService: ApiDepartmentService
     ) {
     super();
   }
@@ -36,13 +54,25 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
       this.employeesList = this.apiEmployeeService.getEmployees().subscribe(
         data => {
           this.dataSource = new MatTableDataSource(data);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.filterPredicate = this.getFilterPredicate();
         }
       )
     );
+    this.addSubscription(
+      this.apiDepartmentService.getDepartments().subscribe(
+      data => this.options = data
+    ));
+  }
+
+
+  displayOption(option) {
+    return option ? option.name : undefined;
   }
 
   changeStyle($event){
-    this.buttonClass = $event.type == 'mouseover' ? 'animacionVer' : 'null';
+    this.buttonClass = $event.type === 'mouseover' ? 'showAnimation' : 'null';
   }
 
   openDetail(item?) {
@@ -51,11 +81,6 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
 
   createEmployee(item?) {
     this.router.navigate(['/employees/new']);
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   assignDepartment(employee: Employee) {
@@ -73,7 +98,6 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
           // }
         }
       );
-    // console.log(employee);
   }
 
   editEmployee(employee: Employee) {
@@ -96,6 +120,32 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
         }
       );
     }
-  ngOnDestroy() {
+
+  applyFilter() {
+    const name = this.searchEmployeesForm.get('name').value;
+    const department = this.searchEmployeesForm.get('department').value;
+
+    const filterValue = name + '$' + department;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getFilterPredicate() {
+    return (row: Employee, filters: string) => {
+      const filterArray = filters.split('$');
+      const employeeName = filterArray[0];
+      const employeeDepartment = filterArray[1];
+      // const employeeAge = Number(filterArray[2]);
+      const matchFilter = [];
+      const name = row.name || '';
+      const department = row.department as string || '';
+      // const email = Number(row.email) || 9999999;
+      const customFilterName = name.toLowerCase().includes(employeeName);
+      const customFilterDepartments = department.includes(employeeDepartment);
+      // const customFilterAge = email === employeeAge;
+      matchFilter.push(customFilterName);
+      matchFilter.push(customFilterDepartments);
+      // matchFilter.push(customFilterAge);
+      return matchFilter.every(Boolean);
+    };
   }
 }

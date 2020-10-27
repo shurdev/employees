@@ -27,7 +27,7 @@ export class  Employee  extends BaseEntity{
     @Column ({
         length: 300
     })
-    age?: string;
+    email?: string;
 
     @Column()
     createdAt?: Date;
@@ -36,10 +36,11 @@ export class  Employee  extends BaseEntity{
     //     length: 300
     // })
     // department?: string;
-    @OneToOne(type => Department, department => department._id, {
-        cascade: true,
-        eager: true,
-    })
-    @JoinColumn({ referencedColumnName: "_id" })
-    department: Department;
+    // @OneToOne(type => Department, department => department._id, {
+    //     cascade: true,
+    //     eager: true,
+    // })
+    // @JoinColumn({ referencedColumnName: "_id" })
+    @Column()
+    department: string;
 }

@@ -1,19 +1,34 @@
 .detail-view-wrapper {
-  margin-top: 100px;
-  height: 100%;
-  padding: 0;
+  margin: 0 auto;
+  margin-top: 3em;
+  width: 80%;
   display: flex;
-  justify-content: center;
-  align-items: stretch;
-  .form-field.mat-form-field {
-    min-width: 1000px !important;
-    width: 1000px;
-    margin: 10px;
+  flex-direction: column;
+  display: flex !important;;
+  align-items: center !important;;
+  justify-content: center !important;
+  div:first-child {
+    margin: 3em 0;
+    margin-top: 3em;
+  }
+  
+  .view-icon {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.form-field.mat-form-field {
+    margin: 1em 0;
   }
 }
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+
+.form-detail-view {
+  background-color: white;
+  padding: 2em;
+  width: 75%;
+  height: 50%;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 .add-icon {
   float: right;
@@ -21,18 +36,16 @@
   cursor: pointer;
 }
 mat-error {
-  margin-top: -25px;
-  margin-left: 10px;
+  margin-top: -2em !important;
+  margin-bottom: 2.2em !important;
+  margin-left: 1em;
+  font-size: 1em;
 }
 mat-icon {
   font-size: 3em;
 }
-.wrapper{
-  background-color: white;
-  padding: 15px;
-  border-style: solid;
-  border-width: 0.5px;
-  border-radius: 5px;
+mat-form-field {
+  width: 100%;
 }
 
 .form-login-submit{
