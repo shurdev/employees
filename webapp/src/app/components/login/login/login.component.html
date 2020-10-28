@@ -6,18 +6,18 @@
             Usuario o contraseña incorrectos.
           </mat-error>
           <mat-form-field class="full-width-input">
-            <input matInput placeholder="Email" formControlName="username" required>
+            <input id="login-input" matInput placeholder="Email" formControlName="username" required>
             <mat-error>
               Introduce un email correcto.
             </mat-error>
           </mat-form-field>
           <mat-form-field class="full-width-input">
-            <input matInput type="password" placeholder="Password" formControlName="password" required>
+            <input id="password-input" matInput type="password" placeholder="Password" formControlName="password" required>
             <mat-error>
               Introduce una contraseña correcta.
             </mat-error>
           </mat-form-field>
-          <button mat-raised-button color="primary">Entrar</button>
+          <button id="button-login-submit" mat-raised-button color="primary">Entrar</button>
         </form>
       </mat-card-content>
     </mat-card>
