@@ -64,7 +64,7 @@ export class EmployeesDetailViewComponent extends BaseComponent implements OnIni
   submit(employee?) {
     this.apiEmployeeService.postEmployees(employee).subscribe(
       () => {
-        this.openSnackBar('Empleado Creado');
+        this.openSnackBar('Empleado guardado correctamente', 'Guardar');
         this.return();
       }
     );
@@ -87,16 +87,17 @@ export class EmployeesDetailViewComponent extends BaseComponent implements OnIni
   delete(employee) {
     this.apiEmployeeService.deleteEmployee(employee._id).subscribe(
       () => {
-        this.openSnackBar('Empleado Borrado');
+        this.openSnackBar(`Empleado eliminado correctamente`, 'Eliminar');
         this.return();
       }
     );
   }
 
-  openSnackBar(message: string) {
-    this.snackBar.open(message, null, {
+  openSnackBar(message: string, type: string) {
+    this.snackBar.open(message, type, {
       duration: 3000,
-      verticalPosition: 'bottom',
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
       panelClass: ['red-snackbar']
     });
   }

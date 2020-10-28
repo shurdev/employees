@@ -42,10 +42,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
-import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
 
 const MaterialComponents = [
-   
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -89,7 +87,7 @@ const MaterialComponents = [
 @NgModule({
    exports: [MaterialComponents],
    providers: [{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }],
-   declarations: [DialogConfirmComponent]
+   declarations: []
 })
 
 export class MaterialModule {

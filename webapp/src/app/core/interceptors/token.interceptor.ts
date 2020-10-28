@@ -13,6 +13,14 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    request = request.clone({
+      setHeaders: {
+          Authorization: `Bearer token`,
+      }
+    });
+
+    request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
+    request = request.clone({ headers: request.headers.set('Access-Control-Allow-Origin', '*') });
     return next.handle(request);
   }
 }

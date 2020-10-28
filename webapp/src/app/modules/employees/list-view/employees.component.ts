@@ -14,6 +14,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ApiDepartmentService } from 'src/app/core/http/api-department.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employees',
@@ -40,7 +41,8 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
     private router: Router,
     private apiEmployeeService: ApiEmployeeService,
     private dialog: MatDialog,
-    private apiDepartmentService: ApiDepartmentService
+    private apiDepartmentService: ApiDepartmentService,
+    private snackBar: MatSnackBar
     ) {
     super();
   }
@@ -89,13 +91,10 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
           data: employee
         })
         .afterClosed()
-        .subscribe((confirm: boolean) => {
-          // if (confirm) {
-          //   this.apiEmployeeService.deleteEmployee(employee._id)
-          //   .subscribe(
-          //     () => this.initSubscriptions()
-          //   );
-          // }
+        .subscribe((empo: boolean) => {
+          if (confirm) {
+            this.openSnackBar('Departamento asignado correctamente', 'Actualizar');
+          }
         }
       );
   }
@@ -114,7 +113,10 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
           if (confirm) {
             this.apiEmployeeService.deleteEmployee(employee._id)
             .subscribe(
-              () => this.initSubscriptions()
+              () => {
+                this.openSnackBar(`Usuario ${employee.name} eliminado correctamente.`, 'Eliminar');
+                this.initSubscriptions();
+              }
             );
           }
         }
@@ -147,5 +149,14 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
       // matchFilter.push(customFilterAge);
       return matchFilter.every(Boolean);
     };
+  }
+
+  openSnackBar(message: string, type: string) {
+    this.snackBar.open(message, type, {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      panelClass: ['red-snackbar']
+    });
   }
 }

@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./core/components/login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./components/login/login.module').then(m => m.LoginModule)
   },
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: '**', pathMatch: 'full', redirectTo: 'login' },

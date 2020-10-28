@@ -10,12 +10,12 @@ import { MaterialModule } from './material/material.module';
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [  ],
+  declarations: [],
   exports: [
     MaterialModule,
     ReactiveFormsModule,
   ],
-  providers: [MaterialModule],
+  providers: [],
 })
 
 export class SharedModule {

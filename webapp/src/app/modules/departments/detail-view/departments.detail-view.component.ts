@@ -55,7 +55,7 @@ export class DepartmentsDetailViewComponent extends BaseComponent implements OnI
   submit(department?) {
     this.apiDepartmentService.postDepartments(department).subscribe(
       () => {
-        this.openSnackBar('Departamento Creado');
+        this.openSnackBar('Departamento Creado', 'Guardar');
         this.return();
       }
     );
@@ -68,7 +68,7 @@ export class DepartmentsDetailViewComponent extends BaseComponent implements OnI
   delete(department) {
     this.apiDepartmentService.deleteDepartment(department._id).subscribe(
       () => {
-        this.openSnackBar('Departamento Borrada');
+        this.openSnackBar('Departamento Borrada', 'Eliminar');
         this.return();
       }
     );
@@ -91,10 +91,11 @@ export class DepartmentsDetailViewComponent extends BaseComponent implements OnI
     );
   }
 
-  openSnackBar(message: string) {
-    this.snackBar.open(message, null, {
-      duration: 2000,
+  openSnackBar(message: string, type: string) {
+    this.snackBar.open(message, type, {
+      duration: 3000,
       verticalPosition: 'top',
+      horizontalPosition: 'right',
       panelClass: ['red-snackbar']
     });
   }

@@ -21,7 +21,7 @@ export class AssignDialogComponent extends BaseComponent implements OnInit{
 
   constructor(private apiDepartmentService: ApiDepartmentService,
               private apiEmployeeService: ApiEmployeeService,
-              public dialogo: MatDialogRef<AssignDialogComponent>,
+              public dialog: MatDialogRef<AssignDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public employee: Employee) {
       super();
    }
@@ -53,7 +53,7 @@ export class AssignDialogComponent extends BaseComponent implements OnInit{
     this.employee.department = this.assignDepartmentFormControl.value._id;
     if (this.assignDepartmentFormControl.value  && this.assignDepartmentFormControl.value._id) {
       this.apiEmployeeService.postEmployees(this.employee).subscribe(
-        data => console.log(data)
+        () => this.dialog.close(true)
       );
     }
   }
