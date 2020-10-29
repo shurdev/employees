@@ -22,6 +22,17 @@ mat-sidenav-container{
   margin:0;
 }
 
+.button-container{
+  width:90px;
+  height:240px;
+  position:absolute;
+  left:0px;
+  bottom:0px;
+  z-index: 1;
+  margin-bottom:3em;
+}
+
+
 .showFullNavBar {
   width: 15em !important;
 }
@@ -83,3 +94,16 @@ span{
 .showAnimation{
   transform:scale(1);
 }
+
+
+// .header-sidenav-container {
+//   @media (max-width: 420px) {
+//     font-size: 11px;
+//     background-color: lightblue;
+//     width: 100%;
+//     height: 2rem;
+//   }
+//   @media (max-width: 374px) {
+//     font-size: 10px;
+//   }
+// }

@@ -90,8 +90,8 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
           data: employee
         })
         .afterClosed()
-        .subscribe((empo: boolean) => {
-          if (confirm) {
+        .subscribe((emp: Employee) => {
+          if (emp) {
             this.openSnackBar('Departamento asignado correctamente', 'Actualizar');
           }
         }

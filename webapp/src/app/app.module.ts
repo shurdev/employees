@@ -5,10 +5,8 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
-import { EmployeesModule } from './modules/employees/employees.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
-import { DepartmentsModule } from './modules/departments/departments.module';
 import { HeaderModule } from './components/header/header.module';
 import { LoginModule } from './components/login/login.module';
 

@@ -8,8 +8,7 @@
             <mat-label>Buscar Empleados</mat-label>
             <input matInput (keyup)="filterList()" placeholder="Escribe el texto a buscar..." #input formControlName="name" id="filter-input-name">
           </mat-form-field>
-          <div *ngIf="options?.length > 0" >
-            <mat-form-field class="form-field">
+            <mat-form-field class="form-field" *ngIf="options?.length > 0">
               <mat-label>Departamento</mat-label>
               <mat-select matInput placeholder="Departamento" formControlName="department" (selectionChange)="filterList()"  id="filter-input-department">
               <mat-option *ngFor="let department of options; let i = index" [value]="department._id">
@@ -17,7 +16,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          </div>
           <mat-form-field class="form-field">
             <mat-label>Fecha de alta</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="createdAt" (dateInput)="filterList()" id="filter-date">

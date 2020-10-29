@@ -22,17 +22,17 @@ services:
       management-network:
         aliases:
           - mongo
-    # angular-service: # The name of the service
-    #   container_name: angularcontainer  # Container name
-    #   build:
-    #     context: ./webapp
-    #     dockerfile: ./Dockerfile
-    #   ports: 
-    #       - '4200:80' # Port mapping
-    #   networks:
-    #     management-network:
-    #       aliases:
-    #         - webapp
+  angular-service: 
+    container_name: angularcontainer
+    build:
+      context: ./webapp
+      dockerfile: ./Dockerfile
+    ports: 
+        - '4200:80' 
+    networks:
+      management-network:
+        aliases:
+          - webapp
   api:
     container_name: api
     env_file: ./api/.env

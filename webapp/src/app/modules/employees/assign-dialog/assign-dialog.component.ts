@@ -53,7 +53,7 @@ export class AssignDialogComponent extends BaseComponent implements OnInit{
     this.employee.department = this.assignDepartmentFormControl.value._id;
     if (this.assignDepartmentFormControl.value  && this.assignDepartmentFormControl.value._id) {
       this.apiEmployeeService.postEmployees(this.employee).subscribe(
-        () => this.dialog.close(true)
+        (data) => this.dialog.close(data)
       );
     }
   }

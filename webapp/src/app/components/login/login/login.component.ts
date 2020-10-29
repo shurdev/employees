@@ -11,9 +11,8 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  public loginInvalid: boolean;
-  private formSubmitAttempt: boolean;
-  private returnUrl: string;
+  loginInvalid: boolean;
+  formSubmitAttempt: boolean;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -31,7 +30,6 @@ export class LoginComponent implements OnInit {
       }
     );
 
-    // this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/game';
     this.form = this.fb.group({
       username: ['', Validators.email],
       password: ['', Validators.required]
@@ -45,6 +43,7 @@ export class LoginComponent implements OnInit {
         const username = this.form.get('username').value;
         const pass = this.form.get('password').value;
         const user: User = { name: username , password: pass};
+
         this.authService.login(user).subscribe(
           () => this.redirectToHome()
         );
