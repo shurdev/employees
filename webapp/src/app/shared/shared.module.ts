@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
+import { DialogConfirmComponent } from './material/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
   imports: [
@@ -10,7 +11,7 @@ import { MaterialModule } from './material/material.module';
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [],
+  declarations: [DialogConfirmComponent],
   exports: [
     MaterialModule,
     ReactiveFormsModule,

@@ -11,9 +11,11 @@ import { User } from 'src/app/shared/models/user.model';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent  implements OnInit {
+  timedOutCloser;
   @ViewChild('sidenav') sidenav: MatSidenav;
   reason = '';
   buttonClass = '';
+  navBarClass = '';
   user: Subject<User>;
   constructor(
     private router: Router,
@@ -42,7 +44,12 @@ export class HeaderComponent  implements OnInit {
     this.buttonClass = $event.type === 'mouseover' ? 'showAnimation' : null;
   }
 
+  openNavBar($event){
+    this.navBarClass = $event.type === 'mouseover' ? 'showFullNavBar' : null;
+  }
+
   logOut() {
     this.authService.logOut();
   }
+
 }

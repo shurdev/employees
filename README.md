@@ -53,6 +53,18 @@ Start Webapp
 Not testet
 
 
+### Generate Build
+
+npm run build
+
+### Test
+
+npx cypress open
+
+### Test on console
+
+npx cypress run
+
 ## Authors
 
 * **David Poveda** - *Initial work* - [PurpleBooth](https://github.com/shurdev)

@@ -19,7 +19,6 @@
     cursor: pointer;
 }
 
-
 table {
   width: 100%;
 }
@@ -41,4 +40,90 @@ table {
 
 mat-form-field  {
   margin-left: 2rem;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.float-right {
+  float: right;
+}
+
+.mat-header-cell {
+  background-color: #393939;
+  color: white;
+}
+.mat-header-cell:not(:first-child) {
+  padding-left: 0;
+}
+.mat-header-cell span {
+  font-weight: 600;
+  font-stretch: normal;
+  line-height: normal;
+}
+.mat-header-cell:first-child {
+  border-top-left-radius: 0.3em;
+}
+.mat-header-cell:last-child {
+  border-top-right-radius: 0.3em;
+}
+.mat-header-row {
+  height: 3em;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  position: relative;
+  left: -1.5rem;
+  display: none!important;
+  opacity: 0;
+  color: white;
+}
+
+.header {
+  padding: 0.3em;
+}
+
+.type-column {
+  width: 15%;
+  padding-right: 3rem;
+  padding-top: 0em;
+  padding-bottom: 0em;
+}
+.name-column {
+  width: 30%;
+  padding-right: 3rem;
+  padding-top: 0em;
+  padding-bottom: 0em;
+}
+.amount-column {
+  width: 15%;
+  padding-right: 3rem;
+  padding-top: 0em;
+  padding-bottom: 0em;
+}
+.status-column {
+  width: 15%;
+  padding-right: 3rem;
+  padding-top: 0em;
+  padding-bottom: 0em;
+}
+.date-column {
+  width: 20%;
+  padding-right: 3rem;
+  padding-top: 0em;
+  padding-bottom: 0em;
+}
+.state-column {
+  width: 5%;
+}
+
+.mat-row:nth-child(2n) {
+  background-color: #f2f2f2;
+}
+.state-cell {
+  text-align: right;
+}
+.mat-cell {
+  border: none;
 }

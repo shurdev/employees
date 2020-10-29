@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Department } from 'src/app/shared/models/department.model';
@@ -7,6 +7,8 @@ import { ApiDepartmentService } from 'src/app/core/http/api-department.service';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from 'src/app/shared/material/dialog-confirm/dialog-confirm.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-detail-view',
@@ -14,6 +16,8 @@ import { DialogConfirmComponent } from 'src/app/shared/material/dialog-confirm/d
   styleUrls: ['./departments.detail-view.component.scss']
 })
 export class DepartmentsDetailViewComponent extends BaseComponent implements OnInit {
+  @ViewChild(MatSort, { static: false}) columnSort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   form: FormGroup = new FormGroup({
     _id: new FormControl(null),

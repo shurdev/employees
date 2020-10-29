@@ -9,8 +9,9 @@ mat-sidenav {
   background-color: lightblue;
   width: 10em;
 }
+
 .header-icon {
-  font-size: 30px;
+  font-size: 2em;
   width: 100%;
 }
 mat-sidenav-container{
@@ -20,36 +21,9 @@ mat-sidenav-container{
 *{
   margin:0;
 }
-header{
-  height:170px;
-  color:#FFF;
-  font-size:20px;
-  font-family:Sans-serif;
-  background:#009688;
-  padding-top:30px;
-  padding-left:50px;
-}
-.button-container{
-  width:90px;
-  height:240px;
-  position:absolute;
-  left:0px;
-  bottom:0px;
-  z-index: 1;
-  margin-bottom:3em;
-}
 
-.header-sidenav-container {
-  // word-break: break-word;
-  @media (max-width: 420px) {
-    font-size: 11px;
-    background-color: lightblue;
-    width: 100%;
-    height: 2rem;
-  }
-  @media (max-width: 374px) {
-    font-size: 10px;
-  }
+.showFullNavBar {
+  width: 15em !important;
 }
 
 
@@ -67,7 +41,6 @@ header{
   outline:none;
   color:#FFF;
   font: size 5em;;
-  // font-size: 3em;
   box-shadow: 0 0.2em 0.4em rgba(0,0,0,0.16), 0 0.2em 0.4em rgba(0,0,0,0.23);
   transition:.3s;  
   cursor: pointer;

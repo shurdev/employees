@@ -8,7 +8,6 @@ import { DialogConfirmComponent } from 'src/app/shared/material/dialog-confirm/d
 import { MatDialog } from '@angular/material/dialog';
 import { AssignDialogComponent } from '../assign-dialog/assign-dialog.component';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
 import { Department } from 'src/app/shared/models/department.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ApiDepartmentService } from 'src/app/core/http/api-department.service';
@@ -22,18 +21,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent extends BaseComponent implements OnInit, OnDestroy {
+  @ViewChild(MatSort, { static: false}) sortData: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false}) sort: MatSort;
 
   searchEmployeesForm = new FormGroup({
     name: new FormControl(''),
     department: new FormControl(''),
+    createdAt: new FormControl(''),
   });
   employeesList;
   buttonClass = 'none';
   displayedColumns: string[] = ['employeeCode', 'name', 'address', 'email', 'department', 'createdAt', 'action'];
   dataSource;
-  filterPredicate: ((data: any, filter: string) => boolean);
   filteredOptions: Observable<Department[]>;
   options: Department[];
   arrivalStation: any;
@@ -56,9 +55,9 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
       this.employeesList = this.apiEmployeeService.getEmployees().subscribe(
         data => {
           this.dataSource = new MatTableDataSource(data);
-          this.dataSource.sort = this.sort;
+          this.dataSource.sort = this.sortData;
           this.dataSource.paginator = this.paginator;
-          this.dataSource.filterPredicate = this.getFilterPredicate();
+          this.dataSource.filterPredicate = this.getFilter();
         }
       )
     );
@@ -123,30 +122,28 @@ export class EmployeesComponent extends BaseComponent implements OnInit, OnDestr
       );
     }
 
-  applyFilter() {
+  filterList() {
     const name = this.searchEmployeesForm.get('name').value;
     const department = this.searchEmployeesForm.get('department').value;
+    const date = this.searchEmployeesForm.get('createdAt').value;
+    const createdAt = (date === null || date === '') ? '' : new Date(date).toLocaleDateString();
 
-    const filterValue = name + '$' + department;
+    const filterValue = name + '$$' + department + '$$' + createdAt;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getFilterPredicate() {
+  getFilter() {
     return (row: Employee, filters: string) => {
-      const filterArray = filters.split('$');
-      const employeeName = filterArray[0];
-      const employeeDepartment = filterArray[1];
-      // const employeeAge = Number(filterArray[2]);
       const matchFilter = [];
+      const filterArray = filters.split('$$');
       const name = row.name || '';
       const department = row.department as string || '';
-      // const email = Number(row.email) || 9999999;
-      const customFilterName = name.toLowerCase().includes(employeeName);
-      const customFilterDepartments = department.includes(employeeDepartment);
-      // const customFilterAge = email === employeeAge;
-      matchFilter.push(customFilterName);
-      matchFilter.push(customFilterDepartments);
-      // matchFilter.push(customFilterAge);
+      const columnCreatedAt = new Date(row.createdAt);
+
+      matchFilter.push(name.toLowerCase().includes(filterArray[0]));
+      matchFilter.push(department.includes(filterArray[1]));
+      matchFilter.push(columnCreatedAt.toLocaleDateString().toLowerCase() >= filterArray[2]);
+
       return matchFilter.every(Boolean);
     };
   }

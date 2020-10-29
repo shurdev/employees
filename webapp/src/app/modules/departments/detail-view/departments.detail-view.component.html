@@ -5,24 +5,23 @@
     <form class="form-detail-view"  [formGroup]="form" (ngSubmit)="submit()">
         <div class="wrapper">
             <mat-form-field class="form-field">
-                <input placeholder="Nombre
-                " matInput formControlName="name">
+                <input placeholder="Nombre" matInput formControlName="name" id="department-name-input">
             </mat-form-field>
             <mat-error *ngIf="!form.get('name').valid">
                 Campo requerido
             </mat-error>
              <mat-form-field class="form-field">
-                <input placeholder="Descripción" matInput formControlName="description">
+                <input placeholder="Descripción" matInput formControlName="description" id="department-description-input">
             </mat-form-field>
             <mat-error *ngIf="!form.get('description').valid">
                 Descripción muy corta.
             </mat-error>
             <div class="button-container">
                  <button class="form-login-submit form-login-items" type="button" mat-button color="primary"
-                    [disabled]="!form.valid" (click)="submit(form.value)"><a
+                    [disabled]="!form.valid" (click)="submit(form.value)" id="department-button-submit"><a
                         class="form-submit">Guardar</a></button>
                  <button *ngIf="form.get('_id').value" class="form-login-submit form-login-items" type="button"
-                    mat-button color="primary" [disabled]="disabled" (click)="showDeleteDialog(form.value)"><a
+                    mat-button color="primary" [disabled]="disabled" id="department-button-delete"(click)="showDeleteDialog(form.value)"><a
                         class="form-submit">Borrar</a></button>
             </div>
         </div>

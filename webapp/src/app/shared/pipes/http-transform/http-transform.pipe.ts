@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { ApiDepartmentService } from 'src/app/core/http/api-department.service';
 import { Department } from '../../models/department.model';
 
@@ -11,9 +11,10 @@ export class HttpTransformPipe implements PipeTransform {
 
   constructor(private apiDepartment: ApiDepartmentService){}
 
-  transform(value: string, ...args: unknown[]):Observable<string> {
+  transform(value: string, ...args: unknown[]): Observable<string> {
     return this.apiDepartment.getDepartmentById(value)
     .pipe(
+      filter(deptm => deptm !== null),
       map(
         department => department.name
       )

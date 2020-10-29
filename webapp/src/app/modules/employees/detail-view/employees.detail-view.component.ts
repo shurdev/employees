@@ -17,7 +17,7 @@ import { ApiDepartmentService } from 'src/app/core/http/api-department.service';
 })
 export class EmployeesDetailViewComponent extends BaseComponent implements OnInit {
   employeeForm = new FormGroup({
-    _id: new FormControl(),
+    _id: new FormControl(null),
     email: new FormControl('', [Validators.required, Validators.email]),
     name: new FormControl('', [Validators.required]),
     address: new FormControl('', [Validators.required,Validators.minLength(10)]),

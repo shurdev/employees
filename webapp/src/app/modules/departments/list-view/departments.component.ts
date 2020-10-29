@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { ApiDepartmentService } from 'src/app/core/http/api-department.service';
@@ -7,6 +7,8 @@ import { Department } from 'src/app/shared/models/department.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from 'src/app/shared/material/dialog-confirm/dialog-confirm.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-departments',
@@ -14,6 +16,8 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
   styleUrls: ['./departments.component.scss']
 })
 export class DepartmentsComponent extends BaseComponent  implements OnInit{
+  @ViewChild(MatSort, { static: false}) sortData: MatSort;  
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   departmentsList;
   buttonClass = null;
   displayedColumns: string[] = ['departmentCode', 'name', 'description', 'createdAt', 'actions'];
@@ -37,6 +41,8 @@ export class DepartmentsComponent extends BaseComponent  implements OnInit{
       this.apiDepartmentService.getDepartments().subscribe(
         data => {
           this.dataSource = new MatTableDataSource(data);
+          this.dataSource.sort = this.sortData;
+          this.dataSource.paginator = this.paginator;
         }
       )
     );
@@ -53,7 +59,7 @@ export class DepartmentsComponent extends BaseComponent  implements OnInit{
     this.router.navigate(['/departments/new']);
   }
 
-  applyFilter(event: Event) {
+  filterList(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

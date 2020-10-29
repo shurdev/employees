@@ -44,3 +44,86 @@ form{
 mat-form-field  {
   margin-left: 2rem;
 }
+
+
+.mat-table {
+  width: 100%;
+}
+
+.float-right {
+  float: right;
+}
+
+.mat-header-cell {
+  background-color: #393939;
+  color: white;
+}
+.mat-header-cell:not(:first-child) {
+  padding-left: 0;
+}
+.mat-header-cell span {
+  font-weight: 600;
+  font-stretch: normal;
+  line-height: normal;
+}
+.mat-header-cell:first-child {
+  border-top-left-radius: 0.3em;
+}
+.mat-header-cell:last-child {
+  border-top-right-radius: 0.3em;
+}
+
+.mat-header-row {
+  height: 3em;
+}
+
+
+::ng-deep .mat-sort-header-arrow {
+  position: relative;
+  left: -1.5rem;
+  display: none!important;
+  opacity: 0;
+}
+
+.header {
+  padding: 0.3em;
+}
+
+.employee--code-column {
+  width: 5%;
+  padding-right: 3rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.name-column .address-column .department-column {
+  width: 25%;
+  padding-right: 3rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.date-column {
+  width: 10%;
+  padding-right: 3rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.state-column {
+  width: 5%;
+}
+.mat-row:nth-child(2n) {
+  background-color: #f2f2f2;
+}
+.state-cell {
+  text-align: right;
+}
+.mat-cell {
+  border: none;
+}
+
+.green-svg {
+  fill: #6dd400;
+}
+.gray-svg {
+  fill: #b2b4b6;
+}

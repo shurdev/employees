@@ -1,22 +1,16 @@
-<div class="header-container" *ngIf="user | async">
-  <mat-sidenav-container
-      class="header-sidenav-container" (backdropClick)="close('backdrop')">
-    <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
-      <p><button mat-button (click)="close('toggle button')"><mat-icon class="header-icon">menu</mat-icon></button></p>
-      <p><button mat-button (click)="close('toggle button')" [routerLink]="'/employees'"><mat-icon class="header-icon">person_add</mat-icon></button></p>
-      <p><button mat-button (click)="close('toggle button')" [routerLink]="'/departments'"><mat-icon class="header-icon">work</mat-icon></button></p>
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-      <p><button mat-button (click)="sidenav.open()"><mat-icon class="header-icon">menu</mat-icon></button></p>
-      <mat-divider [style]="{'margin': '6px'}"></mat-divider>
-      <p><button [ngStyle]="{'margin-top': '10px'}" mat-button (click)="goToEmployees()">
-        <mat-icon class="header-icon">person_add</mat-icon></button></p>
-      <p><button mat-button  (click)="goToDepartments()">
-        <mat-icon class="header-icon">work</mat-icon></button></p>
-      <mat-divider [style]="{'margin': '6px'}"></mat-divider>
-        <p><button mat-button  (click)="logOut()">
-        <mat-icon class="header-icon">exit_to_app</mat-icon></button></p>
+<div class="header-container" *ngIf="user | async" >
+  <mat-sidenav-container [ngClass]="navBarClass"(mouseover)="openNavBar($event)" (mouseout)="openNavBar($event)"
+      class="header-sidenav-container" (backdropClick)="close('backdrop')"[routerLink]="'/employees'">
+    <mat-sidenav-content >
+      <p><button mat-button ><mat-icon class="header-icon">home</mat-icon></button><a *ngIf="navBarClass==='showFullNavBar'">HOME</a></p>
+      <mat-divider [style]="{'margin': '0.5em'}"></mat-divider>
+      <p (click)="goToEmployees()"><button [ngStyle]="{'margin-top': '1em'}" mat-button >
+        <mat-icon class="header-icon">person_add</mat-icon></button><a *ngIf="navBarClass==='showFullNavBar'">Lista de empleados</a></p>
+      <p (click)="goToDepartments()"><button mat-button  >
+        <mat-icon class="header-icon">work</mat-icon></button><a *ngIf="navBarClass==='showFullNavBar'">Lista de empleados</a></p>
+      <mat-divider [style]="{'margin': '1em'}"></mat-divider>
+        <p (click)="logOut()"><button mat-button >
+        <mat-icon class="header-icon">exit_to_app</mat-icon></button><a *ngIf="navBarClass==='showFullNavBar'">Salir</a></p>
     </mat-sidenav-content>
   </mat-sidenav-container>
 

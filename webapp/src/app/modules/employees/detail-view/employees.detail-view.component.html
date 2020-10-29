@@ -5,19 +5,19 @@
     </div>
     <form class="form-detail-view" [formGroup]="employeeForm" (ngSubmit)="submit()">
         <mat-form-field class="form-field">
-            <input placeholder="Nombre" matInput formControlName="name">
+            <input placeholder="Nombre" matInput formControlName="name" id="employee-name-input">
         </mat-form-field>
         <mat-error *ngIf="!employeeForm.get('name').valid">
             Campo requerido
         </mat-error>
         <mat-form-field class="form-field">
-            <input placeholder="Dirección" matInput formControlName="address">
+            <input placeholder="Dirección" matInput formControlName="address" id="department-address-input">
         </mat-form-field>
-        <mat-error *ngIf="!employeeForm.get('name').valid">
+        <mat-error *ngIf="!employeeForm.get('address').valid">
             Campo requerido
         </mat-error>
         <mat-form-field class="form-field">
-            <input placeholder="Email" matInput type="text" formControlName="email">
+            <input placeholder="Email" matInput type="text" formControlName="email" id="email-address-input">
         </mat-form-field>
         <mat-error *ngIf="!employeeForm.get('email').valid">
             Formato de correo incorrecto
@@ -26,7 +26,7 @@
         </mat-error>
         <mat-form-field class="form-field">
             <mat-label>Departamento</mat-label>
-            <mat-select  placeholder="Departamento" formControlName="department">
+            <mat-select  placeholder="Departamento" formControlName="department" id="employee-department-input">
             <mat-option *ngFor="let department of options; let i = index" [value]="department._id">
               {{ department.name }}
             </mat-option>
@@ -36,7 +36,7 @@
              <button class="form-login-submit form-login-items" type="button" mat-button color="primary"
                 [disabled]="!employeeForm.valid" (click)="submit(employeeForm.value)"><a
                     class="form-submit">Guardar</a></button>
-             <button *ngIf="employeeForm.get('_id')" class="form-login-submit form-login-items" type="button"
+             <button *ngIf="employeeForm.get('_id').value" class="form-login-submit form-login-items" type="button"
                 mat-button color="primary" [disabled]="disabled" (click)="openDeleteEmployeeDialog(employeeForm.value)"><a
                 class="form-submit">Borrar</a></button>
         </div>

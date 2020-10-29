@@ -6,55 +6,61 @@
           <form class="assign-department-form" [formGroup]="searchEmployeesForm">
             <mat-form-field>
             <mat-label>Buscar Empleados</mat-label>
-            <input matInput (keyup)="applyFilter()" placeholder="Escribe el texto a buscar..." #input formControlName="name">
+            <input matInput (keyup)="filterList()" placeholder="Escribe el texto a buscar..." #input formControlName="name" id="filter-input-name">
           </mat-form-field>
           <div *ngIf="options?.length > 0" >
             <mat-form-field class="form-field">
               <mat-label>Departamento</mat-label>
-              <mat-select  placeholder="Departamento" formControlName="department" (selectionChange)="applyFilter()" >
+              <mat-select matInput placeholder="Departamento" formControlName="department" (selectionChange)="filterList()"  id="filter-input-department">
               <mat-option *ngFor="let department of options; let i = index" [value]="department._id">
                 {{ department.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>
           </div>
+          <mat-form-field class="form-field">
+            <mat-label>Fecha de alta</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="createdAt" (dateInput)="filterList()" id="filter-date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker ></mat-datepicker>
+          </mat-form-field>
         </form>
       </div>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
         
-          <ng-container matColumnDef="employeeCode">
-            <th mat-header-cell *matHeaderCellDef> Codigo </th>
+          <ng-container matColumnDef="employeeCode" >
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header="employeeCode" class="employee--code-column"> Codigo </th>
             <td mat-cell *matCellDef="let element"> {{element.employeeCode}} </td>
           </ng-container>
         
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header="name" class="name-column"> Nombre </th>
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
           </ng-container>
         
           <ng-container matColumnDef="address">
-            <th mat-header-cell *matHeaderCellDef> Dirección </th>
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header="address" class="address-column"> Dirección </th>
             <td mat-cell *matCellDef="let element"> {{element.address}} </td>
           </ng-container>
         
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> Edad </th>
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header="email" class="email-column"> Email </th>
             <td mat-cell *matCellDef="let element"> {{element.email}} </td>
           </ng-container>
 
           <ng-container matColumnDef="department">
-            <th mat-header-cell *matHeaderCellDef> Departamento </th>
-            <td mat-cell *matCellDef="let element"> {{element.department | httptransform :element.department |async }} </td>
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header="department" class="department-column"> Departamento </th>
+            <td mat-cell *matCellDef="let element"> {{element.department | httptransform :element.department | async }} </td>
           </ng-container>
 
           <ng-container matColumnDef="createdAt">
-            <th mat-header-cell *matHeaderCellDef> Antiguedad </th>
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header="createdAt" class="date-createdAt"> Antiguedad </th>
             <td mat-cell *matCellDef="let element"> {{element.createdAt | date: 'L/M/yyyy'}} </td>
           </ng-container>
         
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef style="text-align: center !important;"> Acción </th>
-            <td mat-cell *matCellDef="let element"  style="width: 150px !important;">
+            <td mat-cell *matCellDef="let element"  style="width: 10m !important;">
               <mat-icon class="table-action-icon" matTooltip="Asignar" (click)="assignDepartment(element)">assignment_ind</mat-icon>
               <mat-icon class="table-action-icon" matTooltip="Editar" (click)="editEmployee(element)">edit</mat-icon>
               <mat-icon class="table-action-icon" matTooltip="Eliminar" (click)="deleteEmployee(element)">delete</mat-icon>
@@ -63,11 +69,12 @@
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-             <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">No hay registros {{input.value ? ' con: ' + input.value : ''}}</td>
           </tr>
         </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
       </div>
     </div>
   </div>
