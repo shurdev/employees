@@ -7,13 +7,13 @@
           </mat-error>
           <mat-form-field class="full-width-input">
             <input id="login-input" matInput placeholder="Email" formControlName="username" required>
-            <mat-error>
+            <mat-error  *ngIf="!form.get('username').pristine">
               Introduce un email correcto.
             </mat-error>
           </mat-form-field>
           <mat-form-field class="full-width-input">
             <input id="password-input" matInput type="password" placeholder="Password" formControlName="password" required>
-            <mat-error>
+            <mat-error *ngIf="!form.get('password').pristine">
               Introduce una contraseña correcta.
             </mat-error>
           </mat-form-field>

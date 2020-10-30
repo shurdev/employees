@@ -6,23 +6,21 @@
     <form class="form-detail-view" [formGroup]="employeeForm" (ngSubmit)="submit()">
         <mat-form-field class="form-field">
             <input placeholder="Nombre" matInput formControlName="name" id="employee-name-input">
-        </mat-form-field>
-        <mat-error *ngIf="!employeeForm.get('name').valid">
+        </mat-form-field> 
+        <mat-error *ngIf="!employeeForm.get('name').valid && !employeeForm.get('name').pristine">
             Campo requerido
         </mat-error>
         <mat-form-field class="form-field">
             <input placeholder="Dirección" matInput formControlName="address" id="department-address-input">
         </mat-form-field>
-        <mat-error *ngIf="!employeeForm.get('address').valid">
+        <mat-error *ngIf="!employeeForm.get('address').valid && !employeeForm.get('address').pristine">
             Campo requerido
         </mat-error>
         <mat-form-field class="form-field">
             <input placeholder="Email" matInput type="text" formControlName="email" id="email-address-input">
         </mat-form-field>
-        <mat-error *ngIf="!employeeForm.get('email').valid">
+        <mat-error *ngIf="!employeeForm.get('email').valid && !employeeForm.get('email').pristine">
             Formato de correo incorrecto
-        </mat-error>
-        <mat-error *ngIf="!employeeForm.get('email').valid">
         </mat-error>
         <mat-form-field class="form-field">
             <mat-label>Departamento</mat-label>

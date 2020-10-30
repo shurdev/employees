@@ -7,13 +7,13 @@
             <mat-form-field class="form-field">
                 <input placeholder="Nombre" matInput formControlName="name" id="department-name-input">
             </mat-form-field>
-            <mat-error *ngIf="!form.get('name').valid">
+            <mat-error *ngIf="!form.get('name').valid && !form.get('name').pristine">
                 Campo requerido
             </mat-error>
              <mat-form-field class="form-field">
                 <input placeholder="Descripción" matInput formControlName="description" id="department-description-input">
             </mat-form-field>
-            <mat-error *ngIf="!form.get('description').valid">
+            <mat-error *ngIf="!form.get('description').valid && !form.get('description').pristine">
                 Descripción muy corta.
             </mat-error>
             <div class="button-container">
